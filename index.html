@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Gunung — Submit Langsung Summit</title>
+<meta name="description" content="Booking Gunung: solusi praktis untuk booking SIMAKSI pendakian gunung favoritmu. Submit Langsung Summit.">
+<link rel="icon" href="img/logo-ikon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Kaushan+Script&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B2545;      /* biru tua logo & poster */
+    --navy-2:#13325B;
+    --kuning:#FAC81B;    /* matahari di logo */
+    --oranye:#FE5C13;    /* tulisan BOOKING */
+    --langit:#EFF6FB;
+    --abu:#5B6B80;
+    --putih:#FFFFFF;
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;color:var(--navy);background:#fff;line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Barlow Condensed",Impact,sans-serif;font-weight:800;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+  .kuas{font-family:"Kaushan Script",cursive;text-transform:none;font-weight:400;letter-spacing:0}
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{padding:100px 0}
+  .eyebrow{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:var(--oranye);margin-bottom:12px}
+  h2{font-size:clamp(40px,5.4vw,64px);margin-bottom:18px}
+  h2 .kuas{color:var(--oranye);font-size:.9em}
+  .lead{color:var(--abu);font-size:17px;max-width:620px}
+  .tengah{text-align:center}.tengah .lead{margin:0 auto}
+
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--kuning);color:var(--navy);font-weight:700;text-decoration:none;padding:15px 28px;border-radius:999px;border:0;cursor:pointer;font-size:15px;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(250,200,27,.45)}
+  .btn svg{width:18px;height:18px}
+  .btn.navy{background:var(--navy);color:#fff}
+  .btn.navy:hover{box-shadow:0 10px 24px rgba(11,37,69,.35)}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(11,37,69,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .logo img{width:50px;height:50px}
+  .logo b{display:block;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:24px;line-height:.9}
+  .logo b span{color:var(--oranye)}
+  .logo small{font-family:"Barlow Condensed",sans-serif;font-style:italic;font-weight:700;font-size:12px;letter-spacing:.04em}
+  .menu{display:flex;gap:28px;list-style:none;align-items:center}
+  .menu a{text-decoration:none;font-weight:600;font-size:15px}
+  .menu a:hover{color:var(--oranye)}
+  .burger{display:none;background:none;border:0;cursor:pointer;color:var(--navy)}
+  .burger svg{width:30px;height:30px}
+
+  /* HERO */
+  .hero{position:relative;background:linear-gradient(180deg,#E3EEF7 0%,#F6FAFD 100%);padding:0;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:680px}
+  .hero-isi{padding:70px 0 120px;position:relative;z-index:2}
+  .hero h1{font-size:clamp(56px,7.6vw,104px);line-height:.92;margin:6px 0 22px}
+  .hero h1 .kuas{display:block;color:var(--kuning);font-size:1.05em;line-height:1;text-shadow:0 3px 0 rgba(11,37,69,.08)}
+  .hero h1 .kuas.n{color:var(--navy)}
+  .hero p{font-size:18px;color:var(--abu);max-width:470px;margin-bottom:30px}
+  .hero-foto{position:absolute;top:0;right:0;bottom:0;width:52%}
+  .hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 35%}
+  .hero-foto::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#EDF4FA 0%,rgba(237,244,250,0) 22%);z-index:1}
+
+  /* kotak pencarian demo */
+  .cari{position:relative;z-index:3;margin-top:-64px}
+  .cari-box{background:#fff;border-radius:22px;box-shadow:0 24px 60px rgba(11,37,69,.16);padding:22px;display:grid;grid-template-columns:1.3fr 1fr 1fr auto;gap:14px;align-items:end}
+  .cari-box label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--abu);margin:0 0 6px 4px}
+  .cari-box select,.cari-box input{width:100%;height:52px;border:1.5px solid #D9E3EF;border-radius:14px;padding:0 14px;font:inherit;color:var(--navy);background:#F8FBFE}
+  .cari-box .btn{height:52px;border-radius:14px}
+  .demo-catatan{font-size:13px;color:var(--abu);margin:12px 6px 0}
+
+  /* PILAR */
+  .pilar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .pilar{background:var(--langit);border-radius:var(--r);padding:36px 30px;position:relative;overflow:hidden}
+  .pilar .ik{width:64px;height:64px;border-radius:50%;background:var(--navy);display:grid;place-items:center;color:#fff;margin-bottom:20px}
+  .pilar .ik svg{width:30px;height:30px}
+  .pilar h3{font-size:34px;margin-bottom:8px}
+  .pilar p{color:var(--abu)}
+  .pilar:nth-child(2){background:var(--navy);color:#fff}
+  .pilar:nth-child(2) .ik{background:var(--kuning);color:var(--navy)}
+  .pilar:nth-child(2) p{color:#C5D3E6}
+
+  /* TENTANG */
+  .tentang{background:var(--langit)}
+  .tentang-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .tentang-foto{position:relative}
+  .tentang-foto img{border-radius:24px;width:100%;aspect-ratio:2.6/1;object-fit:cover}
+  .tentang-foto .stiker{position:absolute;left:-24px;bottom:-24px;background:var(--kuning);color:var(--navy);border-radius:20px;padding:20px 24px;box-shadow:0 18px 40px rgba(11,37,69,.18);transform:rotate(-3deg)}
+  .stiker b{font-family:"Kaushan Script",cursive;font-size:30px;font-weight:400;display:block;line-height:1}
+  .stiker small{font-weight:600}
+  .tentang-isi p{color:var(--abu);margin-bottom:16px}
+  .vm{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  .vm div{background:#fff;border-radius:16px;padding:20px}
+  .vm h3{font-size:24px;color:var(--oranye);margin-bottom:6px}
+  .vm p{margin:0;font-size:15px}
+
+  /* CARA BOOKING */
+  .cara{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+  .cara h2{color:#fff}
+  .cara .lead{color:#C5D3E6}
+  .langkah{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;counter-reset:l}
+  .langkah-item{position:relative;text-align:center;padding:0 10px}
+  .langkah-item .bulat{width:110px;height:110px;margin:0 auto 22px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;position:relative;box-shadow:0 0 0 8px rgba(255,255,255,.08)}
+  .langkah-item .bulat svg{width:46px;height:46px}
+  .langkah-item .no{position:absolute;top:-4px;right:-4px;width:36px;height:36px;border-radius:50%;background:var(--kuning);color:var(--navy);font-family:"Barlow Condensed";font-weight:800;font-size:20px;display:grid;place-items:center}
+  .langkah-item:not(:last-child)::after{content:"";position:absolute;top:55px;left:calc(50% + 70px);right:calc(-50% + 70px);border-top:2px dashed rgba(255,255,255,.35)}
+  .langkah-item h3{font-size:30px;margin-bottom:6px}
+  .langkah-item p{color:#C5D3E6;font-size:15px}
+  .fitur{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:70px}
+  .fitur div{display:flex;gap:16px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:24px}
+  .fitur .ik{flex:none;width:52px;height:52px;border-radius:50%;background:var(--kuning);color:var(--navy);display:grid;place-items:center}
+  .fitur .ik svg{width:24px;height:24px}
+  .fitur h3{font-size:24px;margin-bottom:4px}
+  .fitur p{color:#C5D3E6;font-size:14px}
+  .gunung-hias{position:absolute;left:0;right:0;bottom:-2px;width:100%;opacity:.12;pointer-events:none}
+
+  /* DESTINASI */
+  .dest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:34px}
+  .filter{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .filter button{font:inherit;font-weight:600;font-size:14px;padding:10px 20px;border-radius:999px;border:1.5px solid #D3DEEB;background:#fff;color:var(--navy);cursor:pointer;transition:.2s}
+  .filter button:hover{border-color:var(--navy)}
+  .filter button.aktif{background:var(--navy);border-color:var(--navy);color:#fff}
+  .dest.sembunyi{display:none}
+  .dest{display:flex;flex-direction:column}
+  .dest-isi{display:flex;flex-direction:column;flex:1}
+  .dest-isi .desk{font-size:14px;color:var(--abu);margin:-6px 0 16px;flex:1}
+  .dest-gambar .ilustrasi{position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(180deg,var(--c1),var(--c2))}
+  .dest-gambar img{position:relative;color:transparent;font-size:0}
+  .dest{border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 14px 40px rgba(11,37,69,.1);transition:transform .3s}
+  .dest:hover{transform:translateY(-6px)}
+  .dest-gambar{aspect-ratio:16/11;position:relative}
+  .dest-gambar{overflow:hidden;background:var(--navy-2)}
+  .dest-gambar img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .dest:hover .dest-gambar img{transform:scale(1.06)}
+  .dest-gambar .tag{position:absolute;z-index:2;top:16px;left:16px;background:rgba(255,255,255,.92);color:var(--navy);font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px}
+  .dest-isi{padding:22px 24px 26px}
+  .dest-isi h3{font-size:30px}
+  .dest-isi .lok{color:var(--abu);font-size:13px;margin:4px 0 14px;display:flex;gap:6px;align-items:center}
+  .dest-isi .lok svg{width:16px;height:16px;color:var(--oranye)}
+  .dest-isi .baris{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #E4EBF3;padding-top:16px}
+  .dest-isi .tinggi{font-family:"Barlow Condensed";font-weight:800;font-size:26px;white-space:nowrap}
+  .dest-isi .tinggi.dua{font-size:21px}
+  .dest-isi .tinggi small{font-family:"Inter";font-weight:500;font-size:13px;color:var(--abu)}
+  .dest-isi a{font-weight:700;font-size:14px;color:var(--oranye);text-decoration:none}
+
+  /* APLIKASI */
+  .app{background:linear-gradient(180deg,#fff,var(--langit))}
+  .app-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+  .app-foto{position:relative;display:flex;justify-content:center}
+  .app-foto::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--kuning);top:50%;left:50%;transform:translate(-50%,-50%)}
+  .app-foto img{position:relative;width:min(380px,100%);border-radius:28px;box-shadow:0 30px 70px rgba(11,37,69,.3)}
+  .cek{list-style:none;margin:26px 0 30px;display:grid;gap:14px}
+  .cek li{display:flex;gap:14px;align-items:flex-start;font-weight:500}
+  .cek li span{flex:none;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--kuning);display:grid;place-items:center;font-size:14px}
+
+  /* GALERI */
+  .galeri{padding-bottom:0}
+  .galeri-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:44px}
+  .galeri-strip figure{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--navy)}
+  .galeri-strip img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .galeri-strip figure:hover img{transform:scale(1.06)}
+  .galeri-strip figcaption{position:absolute;inset:auto 0 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(11,37,69,.85));color:#fff;font-weight:600;font-size:14px;opacity:0;transition:opacity .3s}
+  .galeri-strip figure:hover figcaption{opacity:1}
+
+  /* CTA */
+  .cta{background:var(--kuning);padding:70px 0;position:relative;overflow:hidden}
+  .cta-grid{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;position:relative;z-index:2}
+  .cta h2{margin:0;font-size:clamp(36px,4.6vw,56px)}
+  .cta h2 .kuas{color:var(--navy)}
+
+  /* KONTAK */
+  .kontak{background:var(--navy);color:#fff;padding:80px 0 40px}
+  .kontak-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}
+  .kontak .logo b{color:#fff}
+  .kontak p{color:#C5D3E6;margin-top:16px;max-width:340px}
+  .kontak h4{font-family:"Barlow Condensed";font-weight:800;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:var(--kuning);margin-bottom:16px}
+  .kontak ul{list-style:none;display:grid;gap:12px}
+  .kontak ul a{text-decoration:none;display:flex;gap:12px;align-items:center;color:#E3ECF7}
+  .kontak ul a:hover{color:var(--kuning)}
+  .kontak ul svg{width:20px;height:20px}
+  .bawah{border-top:1px solid rgba(255,255,255,.12);margin-top:56px;padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#9FB2CC}
+
+  .toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);opacity:0;visibility:hidden;background:var(--navy);color:#fff;padding:14px 22px;border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.25);font-size:14px;z-index:99;transition:transform .35s,opacity .35s,visibility .35s;max-width:90vw;text-align:center}
+  .toast.on{transform:translate(-50%,0);opacity:1;visibility:visible}
+
+  .muncul{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .muncul.tampil{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.muncul{opacity:1;transform:none}}
+
+  /* TABLET */
+  @media (max-width:980px){
+    .menu{display:none}
+    .menu.buka{display:flex;position:absolute;top:76px;left:0;right:0;flex-direction:column;gap:0;background:#fff;padding:8px 0 20px;box-shadow:0 12px 24px rgba(11,37,69,.1)}
+    .menu.buka a{display:block;padding:12px 24px}
+    .menu.buka .btn{margin:8px 24px 0}
+    .burger{display:block}
+    .hero-grid{grid-template-columns:1fr;min-height:0}
+    .hero-foto{position:relative;width:100%;height:420px;order:-1}
+    .hero-foto::before{background:linear-gradient(0deg,#EDF4FA 0%,rgba(237,244,250,0) 30%)}
+    .hero-isi{padding:10px 0 100px}
+    .cari-box{grid-template-columns:1fr 1fr}
+    .cari-box .pilih{grid-column:span 2}
+    .cari-box .btn{grid-column:span 2;justify-content:center}
+    .tentang-grid,.app-grid{grid-template-columns:1fr;gap:60px}
+    .langkah{grid-template-columns:1fr 1fr;row-gap:44px}
+    .langkah-item::after{display:none}
+    .fitur,.pilar-grid{grid-template-columns:1fr}
+    .dest-grid{grid-template-columns:1fr 1fr}
+    .galeri-strip{grid-template-columns:repeat(3,1fr)}
+    .kontak-grid{grid-template-columns:1fr 1fr}
+    .kontak-grid > div:first-child{grid-column:span 2}
+  }
+  @media (max-width:560px){
+    section{padding:72px 0}
+    .hero-foto{height:340px}
+    .cari-box{grid-template-columns:1fr}
+    .cari-box .pilih,.cari-box .btn{grid-column:auto}
+    .vm{grid-template-columns:1fr}
+    .dest-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 22px;margin:28px -24px 0;padding-left:24px;scroll-padding-left:24px}
+    .dest{scroll-snap-align:start}
+    .dest-grid::-webkit-scrollbar{height:0}
+    .tentang-foto .stiker{left:12px;bottom:-20px}
+    .app-foto::before{width:300px;height:300px}
+    .galeri-strip{grid-template-columns:1fr 1fr}
+    .galeri-strip figure:nth-child(n){display:block}
+    .galeri-strip figcaption{opacity:1}
+    .kontak-grid{grid-template-columns:1fr}
+    .kontak-grid > div:first-child{grid-column:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap nav">
+    <a href="#beranda" class="logo"><img src="img/logo-ikon.png" alt="Logo Booking Gunung">
+      <span><b><span>BOOKING</span><br>GUNUNG</b><small>Submit Langsung Summit</small></span></a>
+    <button class="burger" aria-label="Buka menu" onclick="document.getElementById('menu').classList.toggle('buka')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+    <ul class="menu" id="menu">
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#cara">Cara Booking</a></li>
+      <li><a href="#destinasi">Destinasi</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+      <li><a href="#cari" class="btn navy">Mulai Booking</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 1. BERANDA -->
+<section class="hero" id="beranda">
+  <div class="hero-foto"><img src="img/hero-pendaki.jpg" alt="Tiga pendaki tersenyum di puncak dengan latar gunung dan lautan awan"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-isi muncul">
+      <span class="eyebrow">Booking SIMAKSI pendakian</span>
+      <h1>Dari<span class="kuas">Submit</span><span class="kuas n">Langsung Summit</span></h1>
+      <p>Solusi praktis untuk booking SIMAKSI pendakian gunung favoritmu. Lebih mudah, lebih cepat, lebih dekat dengan petualangan.</p>
+      <a href="#cara" class="btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Mulai Booking Sekarang</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pencarian (simulasi) -->
+<div class="wrap cari" id="cari">
+  <form class="cari-box muncul" onsubmit="event.preventDefault();demo()">
+    <div class="pilih"><label for="g">Gunung tujuan</label>
+      <select id="g"><option>Rinjani — Lombok, NTB</option><option>Semeru — Jawa Timur</option><option>Prau — Dieng, Jawa Tengah</option><option>Merbabu — Jawa Tengah</option><option>Gede & Pangrango — Jawa Barat</option><option>Lawu — Perbatasan Jawa Tengah & Jawa Timur</option><option>Papandayan — Garut, Jawa Barat</option><option>Kerinci — Jambi / perbatasan Sumatera Barat</option></select></div>
+    <div><label for="t1">Tanggal naik</label><input id="t1" type="date"></div>
+    <div><label for="p">Jumlah pendaki</label><select id="p"><option>1 orang</option><option>2 orang</option><option>3 orang</option><option>4 orang</option><option>5+ orang</option></select></div>
+    <button class="btn" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>Cari</button>
+  </form>
+  <p class="demo-catatan">Formulir ini simulasi untuk proyek tugas kuliah dan tidak terhubung dengan sistem SIMAKSI resmi.</p>
+</div>
+
+<!-- PILAR KARAKTER -->
+<section>
+  <div class="wrap">
+    <div class="tengah muncul">
+      <span class="eyebrow">Karakter kami</span>
+      <h2>Teman <span class="kuas">mendaki</span> yang bisa diandalkan</h2>
+    </div>
+    <div class="pilar-grid">
+      <div class="pilar muncul">
+        <div class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20l6-10 4 6 3-4 5 8z"/><path d="M8 12l1.5 1.5L11 12"/></svg></div>
+        <h3>Petualang</h3>
+        <p>Pendakian gunung adalah kegiatan utama kami. Kami mendukung setiap langkah eksplorasi alammu.</p>
+      </div>
+      <div class="pilar muncul">
+        <div class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg></div>
+        <h3>Praktis</h3>
+        <p>Booking SIMAKSI lebih mudah dan cepat. Cukup submit, lalu fokus menyiapkan pendakianmu.</p>
+      </div>
+      <div class="pilar muncul">
+        <div class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Terpercaya</h3>
+        <p>Layanan booking yang aman dan dapat diandalkan, dari pengisian data sampai izin terbit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. TENTANG -->
+<section class="tentang" id="tentang">
+  <div class="wrap tentang-grid">
+    <div class="tentang-foto muncul">
+      <img src="img/pegunungan.jpg" alt="Deretan gunung di atas lautan awan">
+      <div class="stiker"><b>Submit Langsung Summit</b><small>Tagline Booking Gunung</small></div>
+    </div>
+    <div class="tentang-isi muncul">
+      <span class="eyebrow">Tentang Booking Gunung</span>
+      <h2>Solusi mudah untuk <span class="kuas">mendaki</span></h2>
+      <p>Booking Gunung lahir dari satu kerepotan yang sering dialami pendaki: mengurus SIMAKSI (Surat Izin Masuk Kawasan Konservasi). Kami ingin prosesnya sesederhana mungkin. Pendaki cukup melakukan submit, lalu bisa langsung summit ke tujuan yang mereka inginkan.</p>
+      <p>Warna kuning di logo kami melambangkan energi dan keceriaan, sedangkan biru memberi rasa tenang dan percaya.</p>
+      <div class="vm">
+        <div><h3>Visi</h3><p>Menjadi teman pertama setiap pendaki Indonesia sebelum melangkah ke jalur.</p></div>
+        <div><h3>Misi</h3><p>Menyederhanakan booking izin pendakian agar aman, cepat, dan bisa diakses siapa saja.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. LAYANAN: CARA BOOKING -->
+<section class="cara" id="cara">
+  <svg class="gunung-hias" viewBox="0 0 1440 260" preserveAspectRatio="none"><path d="M0 260L240 80l140 120L620 0l220 190 160-110 440 180z" fill="#fff"/></svg>
+  <div class="wrap">
+    <div class="tengah muncul">
+      <span class="eyebrow" style="color:var(--kuning)">Layanan kami</span>
+      <h2><span class="kuas" style="color:var(--kuning)">Cara</span> booking</h2>
+      <p class="lead">Empat langkah dari layar ponsel sampai puncak.</p>
+    </div>
+    <div class="langkah">
+      <div class="langkah-item muncul"><div class="bulat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h8l4 4v6"/><path d="M6 3v18h7"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="M19 19l2.5 2.5"/></svg><span class="no">1</span></div><h3>Pilih Gunung</h3><p>Tentukan gunung tujuanmu.</p></div>
+      <div class="langkah-item muncul"><div class="bulat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h4"/><circle cx="17" cy="18" r="3" fill="#fff"/><path d="M15.8 18l.9.9 1.6-1.7"/></svg><span class="no">2</span></div><h3>Isi Data</h3><p>Lengkapi data dengan mudah.</p></div>
+      <div class="langkah-item muncul"><div class="bulat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg><span class="no">3</span></div><h3>Submit</h3><p>Proses cepat dan aman.</p></div>
+      <div class="langkah-item muncul"><div class="bulat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 21l7-11 4 5 3-3 6 9z"/><path d="M12 3v7M12 3l5 2-5 2"/></svg><span class="no">4</span></div><h3>Langsung Summit</h3><p>Siap untuk petualanganmu!</p></div>
+    </div>
+    <div class="fitur">
+      <div class="muncul"><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><span><h3>Akses mudah kapan saja</h3><p>Booking dari mana pun, langsung lewat website atau smartphone.</p></span></div>
+      <div class="muncul"><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><h3>Proses resmi dan aman</h3><p>Dirancang untuk alur SIMAKSI pendakian.</p></span></div>
+      <div class="muncul"><span class="ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M15 14.5c3 0 6 2 6 5.5"/></svg></span><span><h3>Untuk semua pecinta gunung</h3><p>Cocok untuk pendaki pemula hingga berpengalaman.</p></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DESTINASI -->
+<section id="destinasi">
+  <div class="wrap">
+    <div class="tengah muncul">
+      <span class="eyebrow">Gunung tujuan</span>
+      <h2>Mau summit <span class="kuas">ke mana?</span></h2>
+      <p class="lead">Delapan gunung favorit pendaki Indonesia, dari jalur ramah pemula sampai tantangan untuk yang berpengalaman.</p>
+    </div>
+    <div class="filter muncul" role="tablist" aria-label="Kategori gunung">
+      <button class="aktif" data-f="semua">Semua</button>
+      <button data-f="pemula">Ramah pemula</button>
+      <button data-f="menengah">Menengah</button>
+      <button data-f="berpengalaman">Berpengalaman</button>
+    </div>
+    <div class="dest-grid">
+      <article class="dest muncul" data-level="berpengalaman">
+        <div class="dest-gambar" style="--c1:#7EB6E6;--c2:#2E4E7A"><span class="tag">Berpengalaman</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-rinjani.jpg" alt="Gunung Rinjani dengan Danau Segara Anak dan Gunung Barujari" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Rinjani</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Lombok, NTB</div>
+          <p class="desk">Dikenal dengan Danau Segara Anak, sabana, dan tantangan jalur pendakiannya.</p>
+          <div class="baris"><span class="tinggi">3.726 <small>mdpl</small></span><a href="#cari" onclick="pilih(0)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="berpengalaman">
+        <div class="dest-gambar" style="--c1:#FDB750;--c2:#5C6E8E"><span class="tag">Berpengalaman</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-semeru.jpg" alt="Gunung Semeru saat matahari terbit di atas hutan cemara" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Semeru</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Jawa Timur</div>
+          <p class="desk">Gunung tertinggi di Pulau Jawa dengan puncak Mahameru dan lanskap yang menantang.</p>
+          <div class="baris"><span class="tinggi">3.676 <small>mdpl</small></span><a href="#cari" onclick="pilih(1)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="pemula">
+        <div class="dest-gambar" style="--c1:#F7A36B;--c2:#7A4E7E"><span class="tag">Ramah pemula</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-prau.jpg" alt="Gunung Prau" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Prau</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Dieng, Jawa Tengah</div>
+          <p class="desk">Favorit pemula karena jalur relatif singkat dan pemandangan sunrise serta bukitnya.</p>
+          <div class="baris"><span class="tinggi">2.565 <small>mdpl</small></span><a href="#cari" onclick="pilih(2)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="menengah">
+        <div class="dest-gambar" style="--c1:#A9D8C8;--c2:#3D7A5E"><span class="tag">Menengah</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-merbabu.jpg" alt="Pemandangan gunung dari padang sabana Merbabu" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Merbabu</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Jawa Tengah</div>
+          <p class="desk">Terkenal dengan padang sabana luas dan panorama puncak yang memukau.</p>
+          <div class="baris"><span class="tinggi">3.145 <small>mdpl</small></span><a href="#cari" onclick="pilih(3)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="menengah">
+        <div class="dest-gambar" style="--c1:#9CC9A0;--c2:#2F5D50"><span class="tag">Menengah</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-gede-pangrango.jpg" alt="Gunung Gede dan Pangrango" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Gede & Pangrango</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Jawa Barat</div>
+          <p class="desk">Populer dengan Alun-Alun Surya Kencana, edelweis, dan akses yang relatif dekat dari Jabodetabek.</p>
+          <div class="baris"><span class="tinggi dua">2.958 / 3.019 <small>mdpl</small></span><a href="#cari" onclick="pilih(4)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="menengah">
+        <div class="dest-gambar" style="--c1:#C9B7E8;--c2:#4B3F78"><span class="tag">Menengah</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-lawu.jpg" alt="Gunung Lawu" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Lawu</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Perbatasan Jawa Tengah & Jawa Timur</div>
+          <p class="desk">Menawarkan jalur panjang dengan nuansa sejarah dan tradisi lokal yang khas.</p>
+          <div class="baris"><span class="tinggi">3.265 <small>mdpl</small></span><a href="#cari" onclick="pilih(5)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="pemula">
+        <div class="dest-gambar" style="--c1:#E8E2B7;--c2:#6E6A4A"><span class="tag">Ramah pemula</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-papandayan.jpg" alt="Gunung Papandayan" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Papandayan</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Garut, Jawa Barat</div>
+          <p class="desk">Cocok untuk pemula dengan variasi medan seperti hutan mati, padang edelweis, dan kawah.</p>
+          <div class="baris"><span class="tinggi">2.665 <small>mdpl</small></span><a href="#cari" onclick="pilih(6)">Booking →</a></div></div>
+      </article>
+      <article class="dest muncul" data-level="berpengalaman">
+        <div class="dest-gambar" style="--c1:#9FD3E6;--c2:#24506B"><span class="tag">Berpengalaman</span>
+          <svg class="ilustrasi" viewBox="0 0 320 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 220L70 140l40 30 80-110 70 90 60-40v110z" fill="rgba(255,255,255,.18)"/><path d="M190 60l16 20-8-3-8 8-10-9-8 6z" fill="#fff" opacity=".85"/><path d="M0 220l100-55 80 35 140-55v75z" fill="rgba(11,37,69,.55)"/></svg>
+          <img src="img/gunung-kerinci.jpg" alt="Gunung Kerinci" loading="lazy" onerror="this.remove()"></div>
+        <div class="dest-isi"><h3>Kerinci</h3><div class="lok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Jambi / perbatasan Sumatera Barat</div>
+          <p class="desk">Gunung berapi tertinggi di Indonesia dan favorit pendaki berpengalaman.</p>
+          <div class="baris"><span class="tinggi">3.805 <small>mdpl</small></span><a href="#cari" onclick="pilih(7)">Booking →</a></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- APLIKASI -->
+<section class="app">
+  <div class="wrap app-grid">
+    <div class="app-foto muncul"><img src="img/mockup-ponsel.jpg" alt="Tampilan Booking Gunung di smartphone"></div>
+    <div class="muncul">
+      <span class="eyebrow">Booking dari genggaman</span>
+      <h2>Satu layar, <span class="kuas">semua beres</span></h2>
+      <p class="lead">Cari gunung tujuan, lihat gunung favorit, dan selesaikan booking SIMAKSI langsung dari smartphone.</p>
+      <ul class="cek">
+        <li><span>✓</span>Pencarian gunung tujuan dalam satu kolom</li>
+        <li><span>✓</span>Daftar gunung favorit yang mudah dijelajahi</li>
+        <li><span>✓</span>Tampilan ringan dan nyaman di layar ponsel</li>
+      </ul>
+      <a href="#cari" class="btn navy">Coba sekarang</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. GALERI -->
+<section class="galeri" id="galeri">
+  <div class="wrap tengah muncul">
+    <span class="eyebrow">@bookinggunung</span>
+    <h2>Cerita dari <span class="kuas">jalur</span></h2>
+    <p class="lead">Cuplikan konten dari media sosial kami.</p>
+  </div>
+  <div class="galeri-strip">
+    <figure><img src="img/konten3.jpg" alt="Poster kampanye Booking Gunung" style="object-position:50% 20%"><figcaption>Poster: Dari Submit Langsung Summit</figcaption></figure>
+    <figure><img src="img/jalur-semeru.jpg" alt="Semeru saat matahari terbit"><figcaption>Fajar di Semeru</figcaption></figure>
+    <figure><img src="img/konten1.jpg" alt="Konten tagline Submit Langsung Summit"><figcaption>Submit Langsung Summit</figcaption></figure>
+    <figure><img src="img/jalur-rinjani.jpg" alt="Danau Segara Anak di kaldera Rinjani"><figcaption>Segara Anak, Rinjani</figcaption></figure>
+    <figure><img src="img/konten2.jpg" alt="Checklist sebelum submit"><figcaption>Checklist sebelum submit</figcaption></figure>
+    <figure><img src="img/jalur-kerinci.jpg" alt="Kebun teh Kayu Aro dengan latar Gunung Kerinci"><figcaption>Kayu Aro, kaki Kerinci</figcaption></figure>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="wrap cta-grid">
+    <h2>Lebih banyak gunung,<br><span class="kuas">lebih banyak cerita seru!</span></h2>
+    <a href="#cari" class="btn navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Mulai Booking Sekarang</a>
+  </div>
+</section>
+
+<!-- 5. KONTAK -->
+<footer class="kontak" id="kontak">
+  <div class="wrap">
+    <div class="kontak-grid">
+      <div>
+        <a href="#beranda" class="logo"><img src="img/logo-ikon.png" alt="Logo Booking Gunung"><span><b><span>BOOKING</span><br>GUNUNG</b><small style="color:#C5D3E6">Submit Langsung Summit</small></span></a>
+        <p>Solusi praktis untuk booking SIMAKSI pendakian gunung favoritmu. Lebih mudah, lebih cepat, lebih dekat dengan petualangan.</p>
+      </div>
+      <div>
+        <h4>Ikuti kami</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/bookinggunung" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>@bookinggunung</a></li>
+          <li><a href="https://www.tiktok.com/@bookinggunung" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.8 2.4 4.6 5 5"/></svg>@bookinggunung</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Jelajahi</h4>
+        <ul>
+          <li><a href="#tentang">Tentang kami</a></li>
+          <li><a href="#cara">Cara booking</a></li>
+          <li><a href="#destinasi">Gunung favorit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bawah">
+      <span>© <span id="tahun"></span> Booking Gunung · Submit Langsung Summit</span>
+      <span>Proyek tugas kuliah — Strategy Brand Communication, Ilmu Komunikasi UNDIRA. Bukan layanan SIMAKSI resmi.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Ini simulasi untuk proyek tugas kuliah. Booking SIMAKSI resmi dilakukan melalui pengelola taman nasional.</div>
+
+<script>
+  document.getElementById('tahun').textContent = new Date().getFullYear();
+  document.querySelectorAll('.menu a').forEach(a => a.addEventListener('click', () =>
+    document.getElementById('menu').classList.remove('buka')));
+
+  function pilih(i){ document.getElementById('g').selectedIndex = i; }
+  document.querySelectorAll('.filter button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.filter button').forEach(x => x.classList.remove('aktif'));
+    b.classList.add('aktif');
+    document.querySelectorAll('.dest').forEach(d => d.classList.toggle('sembunyi', b.dataset.f !== 'semua' && d.dataset.level !== b.dataset.f));
+  }));
+  function demo(){
+    const t = document.getElementById('toast');
+    t.classList.add('on'); clearTimeout(window._t);
+    window._t = setTimeout(() => t.classList.remove('on'), 4200);
+  }
+
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('tampil'); io.unobserve(e.target); }
+  }), {threshold:.1});
+  document.querySelectorAll('.muncul').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
