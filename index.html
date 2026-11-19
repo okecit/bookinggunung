@@ -193,6 +193,48 @@
   .muncul.tampil{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.muncul{opacity:1;transform:none}}
 
+
+  /* KISAH PENDAKIAN */
+  .kisah{background:var(--langit)}
+  .kisah-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:48px}
+  .kisah-utama{grid-row:span 2;display:flex;flex-direction:column}
+  .k-kartu{background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 14px 40px rgba(11,37,69,.1);cursor:pointer;transition:transform .3s;text-align:left;border:0;font:inherit;color:inherit;padding:0}
+  .k-kartu:hover{transform:translateY(-6px)}
+  .k-kartu .gb{position:relative;overflow:hidden}
+  .k-kartu .gb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .k-kartu:hover .gb img{transform:scale(1.05)}
+  .kisah-utama .gb{flex:1;min-height:300px}
+  .kisah-kecil{display:grid;grid-template-columns:42% 1fr}
+  .kisah-kecil .gb{min-height:220px}
+  .k-isi{padding:24px 26px 26px}
+  .k-label{display:inline-block;font-size:12px;font-weight:700;color:var(--oranye);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
+  .k-isi h3{font-size:30px;line-height:1.02;margin-bottom:10px}
+  .kisah-utama .k-isi h3{font-size:clamp(32px,3.4vw,42px)}
+  .k-isi p{color:var(--abu);font-size:15px;margin-bottom:14px}
+  .k-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--abu);border-top:1px solid #E4EBF3;padding-top:14px}
+  .k-meta b{color:var(--oranye);font-size:14px;white-space:nowrap}
+  .kisah-bawah{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+  .kisah-catatan{font-size:13px;color:var(--abu);text-align:center;margin-top:28px}
+
+  /* PEMBACA ARTIKEL */
+  dialog.baca{margin:auto;border:0;padding:0;width:min(820px,94vw);max-height:92vh;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.35);color:var(--navy)}
+  dialog.baca::backdrop{background:rgba(11,37,69,.7);backdrop-filter:blur(3px)}
+  .baca-tutup{position:sticky;top:14px;display:block;margin:14px 14px -58px auto;z-index:3;width:44px;height:44px;border-radius:50%;border:0;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.2);font-size:22px;cursor:pointer;color:var(--navy)}
+  .artikel-sampul{height:340px;overflow:hidden}
+  .artikel-sampul img{width:100%;height:100%;object-fit:cover}
+  .artikel{padding:36px clamp(22px,6vw,64px) 56px}
+  .artikel h2{font-size:clamp(36px,5vw,54px);margin:6px 0 14px}
+  .artikel .byline{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--abu);padding-bottom:22px;border-bottom:1px solid #E4EBF3;margin-bottom:26px}
+  .artikel .lead{font-size:20px;line-height:1.6;color:var(--navy);font-weight:500;margin-bottom:22px}
+  .artikel h3{font-size:28px;margin:34px 0 10px;color:var(--navy)}
+  .artikel p{font-size:17px;line-height:1.8;color:#334862;margin-bottom:16px}
+  .artikel blockquote{margin:30px 0;padding:6px 0 6px 22px;border-left:4px solid var(--kuning);font-family:"Kaushan Script",cursive;font-size:28px;line-height:1.35;color:var(--navy)}
+  .artikel .tips{background:var(--langit);border-radius:18px;padding:22px 26px;margin-top:30px}
+  .artikel .tips h4{font-family:"Barlow Condensed";font-weight:800;font-size:22px;text-transform:uppercase;margin-bottom:8px;color:var(--oranye)}
+  .artikel .tips li{font-size:15px;color:#334862;margin:6px 0 6px 18px}
+  .artikel .ajak{margin-top:30px}
+  body.terkunci{overflow:hidden}
+
   /* TABLET */
   @media (max-width:980px){
     .menu{display:none}
@@ -215,6 +257,8 @@
     .galeri-strip{grid-template-columns:repeat(3,1fr)}
     .kontak-grid{grid-template-columns:1fr 1fr}
     .kontak-grid > div:first-child{grid-column:span 2}
+    .kisah-grid,.kisah-bawah{grid-template-columns:1fr}
+    .kisah-utama{grid-row:auto}
   }
   @media (max-width:560px){
     section{padding:72px 0}
@@ -232,6 +276,12 @@
     .galeri-strip figcaption{opacity:1}
     .kontak-grid{grid-template-columns:1fr}
     .kontak-grid > div:first-child{grid-column:auto}
+    .kisah-kecil{grid-template-columns:1fr}
+    .kisah-kecil .gb{min-height:200px}
+    .kisah-utama .gb{min-height:240px}
+    dialog.baca{margin:0}
+    dialog.baca{width:100vw;max-width:100vw;max-height:100vh;height:100vh;border-radius:0}
+    .artikel-sampul{height:240px}
   }
 </style>
 </head>
@@ -246,6 +296,7 @@
       <li><a href="#tentang">Tentang</a></li>
       <li><a href="#cara">Cara Booking</a></li>
       <li><a href="#destinasi">Destinasi</a></li>
+      <li><a href="#kisah">Kisah Pendakian</a></li>
       <li><a href="#galeri">Galeri</a></li>
       <li><a href="#kontak">Kontak</a></li>
       <li><a href="#cari" class="btn navy">Mulai Booking</a></li>
@@ -449,6 +500,207 @@
   </div>
 </section>
 
+<!-- KISAH PENDAKIAN -->
+<section class="kisah" id="kisah">
+  <div class="wrap">
+    <div class="tengah muncul">
+      <span class="eyebrow">Kisah pendakian</span>
+      <h2>Cerita dari <span class="kuas">setiap langkah</span></h2>
+      <p class="lead">Lima catatan perjalanan untuk menemani persiapanmu sebelum submit.</p>
+    </div>
+    <div class="kisah-grid">
+      <button class="k-kartu kisah-utama muncul" data-artikel="a-semeru">
+        <div class="gb"><img src="img/jalur-semeru.jpg" alt="Semeru saat fajar" loading="lazy"></div>
+        <div class="k-isi">
+          <span class="k-label">Semeru · Jalur berpengalaman</span>
+          <h3>Tiga hari menuju Mahameru</h3>
+          <p>Dari danau berkabut di Ranu Kumbolo sampai pasir yang terus melorot di lereng puncak. Catatan pendakian ke atap Pulau Jawa.</p>
+          <div class="k-meta"><span>Tim Booking Gunung · 6 menit baca</span><b>Baca kisah →</b></div>
+        </div>
+      </button>
+      <button class="k-kartu kisah-kecil muncul" data-artikel="a-prau">
+        <div class="gb"><img src="img/gunung-prau.jpg" alt="Sindoro dan Sumbing dari Prau" loading="lazy"></div>
+        <div class="k-isi">
+          <span class="k-label">Prau · Ramah pemula</span>
+          <h3>Sunrise pertama di Prau</h3>
+          <p>Pendakian singkat yang berakhir dengan dua gunung di ufuk timur.</p>
+          <div class="k-meta"><span>3 menit baca</span><b>Baca →</b></div>
+        </div>
+      </button>
+      <button class="k-kartu kisah-kecil muncul" data-artikel="a-papandayan">
+        <div class="gb"><img src="img/gunung-papandayan.jpg" alt="Kawah Papandayan" loading="lazy"></div>
+        <div class="k-isi">
+          <span class="k-label">Papandayan · Ramah pemula</span>
+          <h3>Dari kawah ke hutan mati</h3>
+          <p>Satu jalur, banyak wajah: asap belerang, pohon kering, dan padang edelweis.</p>
+          <div class="k-meta"><span>3 menit baca</span><b>Baca →</b></div>
+        </div>
+      </button>
+    </div>
+    <div class="kisah-bawah">
+      <button class="k-kartu kisah-kecil muncul" data-artikel="a-rinjani">
+        <div class="gb"><img src="img/gunung-rinjani.jpg" alt="Danau Segara Anak di kaldera Rinjani" loading="lazy"></div>
+        <div class="k-isi">
+          <span class="k-label">Rinjani · Jalur berpengalaman</span>
+          <h3>Malam di bibir kaldera Rinjani</h3>
+          <p>Sabana Sembalun, tanjakan panjang, dan danau biru di dasar kawah.</p>
+          <div class="k-meta"><span>4 menit baca</span><b>Baca →</b></div>
+        </div>
+      </button>
+      <button class="k-kartu kisah-kecil muncul" data-artikel="a-gede">
+        <div class="gb"><img src="img/gunung-gede-pangrango.jpg" alt="Gunung Pangrango dilihat dari Gede" loading="lazy"></div>
+        <div class="k-isi">
+          <span class="k-label">Gede · Menengah</span>
+          <h3>Pagi di Surya Kencana</h3>
+          <p>Padang edelweis di atas awan, hanya beberapa jam dari Jakarta.</p>
+          <div class="k-meta"><span>3 menit baca</span><b>Baca →</b></div>
+        </div>
+      </button>
+    </div>
+    <p class="kisah-catatan">Kisah disusun sebagai ilustrasi untuk proyek tugas kuliah. Kondisi jalur dan aturan pendakian dapat berubah, jadi selalu cek informasi resmi pengelola.</p>
+  </div>
+
+  <!-- isi artikel -->
+  <template id="a-semeru">
+    <div class="artikel-sampul"><img src="img/gunung-semeru.jpg" alt="Gunung Semeru saat matahari terbit"></div>
+    <article class="artikel">
+      <span class="eyebrow">Semeru · Jawa Timur · 3.676 mdpl</span>
+      <h2>Tiga Hari Menuju Mahameru</h2>
+      <div class="byline"><span>Oleh Tim Booking Gunung</span><span>·</span><span>6 menit baca</span></div>
+      <p class="lead">Ada gunung yang didaki untuk pemandangannya, ada pula yang didaki karena namanya terus terngiang. Bagi banyak pendaki, Semeru adalah keduanya.</p>
+      <h3>Pagi di Ranu Pani</h3>
+      <p>Perjalanan dimulai di Ranu Pani, desa terakhir sebelum jalur. Udara pagi menggigit, dan antrean pendaki sudah mengular di pos registrasi. Kami menyerahkan berkas, mengikuti pemeriksaan kesehatan, lalu duduk mendengarkan pengarahan petugas tentang jalur, sampah, dan batas pendakian. Lima belas menit itu terasa membosankan saat didengar, tetapi menjadi pegangan selama tiga hari berikutnya.</p>
+      <h3>Ranu Kumbolo, danau di atas awan</h3>
+      <p>Setelah berjam-jam menyusuri punggungan bukit, pepohonan tiba-tiba terbuka. Di bawah sana terhampar Ranu Kumbolo, danau tenang yang permukaannya memantulkan langit. Malam di tepi danau ini dingin sekali. Kami tidur berlapis jaket, dan saat subuh kabut tipis bergerak pelan di atas air, seperti asap dari secangkir teh yang baru diseduh.</p>
+      <h3>Tanjakan Cinta dan Oro-oro Ombo</h3>
+      <p>Pagi kedua dibuka dengan Tanjakan Cinta. Konon, siapa yang mendakinya tanpa menoleh ke belakang akan dimudahkan urusan hatinya. Kami tidak menguji mitos itu; napas sudah cukup sibuk. Di baliknya terbentang Oro-oro Ombo, padang luas yang pada musim tertentu dipenuhi bunga ungu. Dari sini, jalur masuk ke hutan Cemoro Kandang menuju Kalimati.</p>
+      <blockquote>“Di lereng pasir itu, setiap tiga langkah naik dibayar satu langkah turun. Tapi fajar di puncak membayar semuanya.”</blockquote>
+      <h3>Kalimati, menunggu tengah malam</h3>
+      <p>Kalimati adalah pos terakhir sebelum puncak. Sore itu kami makan lebih awal, menyiapkan senter, dan mencoba tidur beberapa jam. Tidak ada yang benar-benar terlelap. Semua menunggu waktu berangkat menuju puncak di tengah malam, saat bintang masih ramai dan suhu berada di titik terendahnya.</p>
+      <h3>Pasir, batu, dan fajar di Mahameru</h3>
+      <p>Lewat Arcopodo, vegetasi habis dan yang tersisa hanya pasir dan kerikil. Setiap langkah melorot. Kami berjalan perlahan, berhenti setiap beberapa menit, dan saling menyemangati dengan kalimat pendek. Langit di timur mulai memerah ketika kami tiba di puncak. Di bawah, lautan awan menutup seluruh lembah, dan sesekali kawah Jonggring Saloko mengembuskan asap ke langit pagi.</p>
+      <p>Kami tidak berlama-lama. Pendaki dianjurkan turun sebelum siang, saat angin mulai membawa gas dari kawah ke arah jalur. Turun jauh lebih cepat daripada naik, dan saat kembali ke Kalimati, yang tersisa hanya rasa lega dan pasir di setiap lipatan sepatu.</p>
+      <div class="tips">
+        <h4>Sebelum berangkat</h4>
+        <ul>
+          <li>Cek status pendakian di kanal resmi Taman Nasional Bromo Tengger Semeru. Akses ke puncak tidak selalu dibuka.</li>
+          <li>Siapkan surat keterangan sehat dan fotokopi identitas sesuai ketentuan pengelola.</li>
+          <li>Bawa pakaian hangat berlapis; malam di Ranu Kumbolo dan Kalimati sangat dingin.</li>
+          <li>Bawa turun kembali semua sampahmu.</li>
+        </ul>
+      </div>
+      <div class="ajak"><a href="#cari" class="btn" data-pilih="1">Booking Semeru →</a></div>
+    </article>
+  </template>
+
+  <template id="a-prau">
+    <div class="artikel-sampul"><img src="img/gunung-prau.jpg" alt="Sindoro dan Sumbing dilihat dari Gunung Prau"></div>
+    <article class="artikel">
+      <span class="eyebrow">Prau · Dieng, Jawa Tengah · 2.565 mdpl</span>
+      <h2>Sunrise Pertama di Prau</h2>
+      <div class="byline"><span>Oleh Tim Booking Gunung</span><span>·</span><span>3 menit baca</span></div>
+      <p class="lead">Untuk pendakian pertama, Prau sering jadi jawaban. Jalurnya relatif singkat, tetapi pemandangannya membuat banyak orang ingin kembali.</p>
+      <h3>Berangkat sore dari Patak Banteng</h3>
+      <p>Kami mulai mendaki menjelang sore dari jalur Patak Banteng. Tangga tanah dan akar pohon membuat napas cepat terengah, tetapi setiap kali menoleh, Telaga Warna dan perkampungan Dieng tampak semakin kecil di bawah. Dalam beberapa jam, kami sudah tiba di area perkemahan di punggungan atas.</p>
+      <h3>Pagi yang ditunggu</h3>
+      <p>Malam di puncak Prau berangin dan dingin. Namun begitu langit timur memerah, semua keluar dari tenda. Di depan kami berdiri Sindoro dan Sumbing berdampingan, dengan lautan kabut di kaki keduanya. Di belakang, bukit-bukit hijau bergelombang seperti permadani, membuat banyak pendaki betah berlama-lama berfoto.</p>
+      <blockquote>“Pendakian pertama tidak harus tinggi. Yang penting, kamu pulang dengan keinginan untuk mendaki lagi.”</blockquote>
+      <div class="tips">
+        <h4>Tips untuk pemula</h4>
+        <ul>
+          <li>Datang lebih awal agar tidak mendaki dalam gelap.</li>
+          <li>Bawa jaket tebal dan pelindung angin untuk malam di puncak.</li>
+          <li>Ikuti jalur resmi dan aturan perkemahan dari pengelola.</li>
+        </ul>
+      </div>
+      <div class="ajak"><a href="#cari" class="btn" data-pilih="2">Booking Prau →</a></div>
+    </article>
+  </template>
+
+  <template id="a-papandayan">
+    <div class="artikel-sampul"><img src="img/gunung-papandayan.jpg" alt="Kawah Gunung Papandayan"></div>
+    <article class="artikel">
+      <span class="eyebrow">Papandayan · Garut, Jawa Barat · 2.665 mdpl</span>
+      <h2>Dari Kawah ke Hutan Mati</h2>
+      <div class="byline"><span>Oleh Tim Booking Gunung</span><span>·</span><span>3 menit baca</span></div>
+      <p class="lead">Papandayan seperti beberapa gunung dalam satu perjalanan. Setiap jam, pemandangannya berganti.</p>
+      <h3>Menyusuri kawah</h3>
+      <p>Dari Camp David, jalur langsung membawa kami ke area kawah. Asap putih mengepul dari celah-celah batu dan bau belerang menyergap hidung. Masker menjadi perlengkapan yang paling sering kami syukuri pagi itu.</p>
+      <h3>Pondok Saladah dan hutan mati</h3>
+      <p>Setelah kawah, jalur melandai menuju Pondok Saladah, padang luas tempat banyak pendaki berkemah. Tak jauh dari sana terbentang hutan mati: batang-batang pohon kering berwarna kelabu di atas tanah putih, sisa letusan masa lalu. Sunyi dan sedikit ganjil, tetapi justru di situlah daya tariknya.</p>
+      <p>Bagian paling manis ada di Tegal Alun, padang edelweis yang luas. Bunganya cantik, dan karena itulah ia dilindungi. Kami cukup memotretnya.</p>
+      <blockquote>“Ambil foto, tinggalkan jejak kaki. Edelweis paling indah saat tetap tumbuh di tempatnya.”</blockquote>
+      <div class="tips">
+        <h4>Tips untuk pemula</h4>
+        <ul>
+          <li>Bawa masker untuk melewati area kawah.</li>
+          <li>Jangan memetik edelweis atau tanaman apa pun.</li>
+          <li>Kenakan sepatu dengan sol yang tidak licin.</li>
+        </ul>
+      </div>
+      <div class="ajak"><a href="#cari" class="btn" data-pilih="6">Booking Papandayan →</a></div>
+    </article>
+  </template>
+
+  <template id="a-rinjani">
+    <div class="artikel-sampul"><img src="img/gunung-rinjani.jpg" alt="Gunung Rinjani dan Danau Segara Anak"></div>
+    <article class="artikel">
+      <span class="eyebrow">Rinjani · Lombok, NTB · 3.726 mdpl</span>
+      <h2>Malam di Bibir Kaldera Rinjani</h2>
+      <div class="byline"><span>Oleh Tim Booking Gunung</span><span>·</span><span>4 menit baca</span></div>
+      <p class="lead">Rinjani bukan sekadar puncak. Ia adalah kaldera raksasa dengan danau di dalamnya, dan untuk melihatnya kamu harus berjalan seharian di bawah matahari Lombok.</p>
+      <h3>Sabana Sembalun</h3>
+      <p>Kami berangkat dari Sembalun pagi-pagi sekali. Jalur awal melintasi sabana luas yang terbuka, dengan rumput keemasan dan bukit-bukit landai di kejauhan. Pemandangannya indah, tetapi hampir tanpa peneduh. Topi, air yang cukup, dan langkah yang sabar menjadi teman terbaik di bagian ini.</p>
+      <h3>Tanjakan yang terasa tak berujung</h3>
+      <p>Setelah pos-pos sabana, jalur mulai menanjak tajam. Para pendaki menamai bagian ini dengan julukan yang jujur: bukit penyesalan. Setiap kali mengira sudah sampai, muncul tanjakan berikutnya. Kami berhenti setiap beberapa menit, minum seteguk, lalu lanjut lagi.</p>
+      <h3>Plawangan, rumah di tepi kawah</h3>
+      <p>Menjelang sore kami tiba di Plawangan Sembalun, area perkemahan di bibir kaldera. Dari tepi tenda, Danau Segara Anak terlihat jauh di bawah, biru kehijauan, dengan Gunung Barujari yang mengepulkan asap di tengahnya. Malam itu angin bertiup kencang, dan langit dipenuhi bintang sampai ke cakrawala.</p>
+      <blockquote>“Rinjani mengajarkan satu hal: perjalanan panjang ditempuh dengan langkah pendek yang tidak berhenti.”</blockquote>
+      <p>Sebagian pendaki melanjutkan ke puncak pada dini hari, sebagian lain memilih turun ke danau. Keduanya sama-sama butuh tenaga, jadi rencanakan sesuai kemampuan timmu, bukan sesuai gengsi.</p>
+      <div class="tips">
+        <h4>Sebelum berangkat</h4>
+        <ul>
+          <li>Daftar melalui sistem pendaftaran resmi Taman Nasional Gunung Rinjani dan cek kuota serta status jalur.</li>
+          <li>Rencanakan minimal 2–3 hari, dan pertimbangkan menggunakan pemandu atau porter berizin.</li>
+          <li>Bawa pelindung matahari untuk sabana dan pakaian hangat untuk malam di Plawangan.</li>
+        </ul>
+      </div>
+      <div class="ajak"><a href="#cari" class="btn" data-pilih="0">Booking Rinjani →</a></div>
+    </article>
+  </template>
+
+  <template id="a-gede">
+    <div class="artikel-sampul"><img src="img/gunung-gede-pangrango.jpg" alt="Gunung Pangrango dilihat dari puncak Gede"></div>
+    <article class="artikel">
+      <span class="eyebrow">Gede · Jawa Barat · 2.958 mdpl</span>
+      <h2>Pagi di Surya Kencana</h2>
+      <div class="byline"><span>Oleh Tim Booking Gunung</span><span>·</span><span>3 menit baca</span></div>
+      <p class="lead">Untuk warga Jabodetabek, Gede adalah pelarian akhir pekan yang paling dekat. Berangkat Jumat malam, Minggu sore sudah kembali ke kota dengan cerita baru.</p>
+      <h3>Hutan basah Gunung Putri</h3>
+      <p>Kami naik lewat jalur Gunung Putri. Hutannya lebat dan lembap, dengan akar-akar pohon yang menjadi anak tangga alami. Jalur ini cukup menanjak, tetapi pepohonan membuat udara tetap sejuk sepanjang jalan.</p>
+      <h3>Alun-Alun Surya Kencana</h3>
+      <p>Setelah hutan, tiba-tiba semuanya terbuka. Surya Kencana adalah padang datar yang luas, dipenuhi semak edelweis. Kabut datang dan pergi dengan cepat, sehingga pemandangannya berganti setiap beberapa menit. Banyak pendaki berkemah di sini, menunggu pagi sambil menyeduh kopi.</p>
+      <h3>Puncak dan Pangrango di seberang</h3>
+      <p>Dari Surya Kencana, puncak Gede bisa dicapai dalam waktu singkat. Di bibir kawah, asap tipis naik perlahan, dan di seberang berdiri Pangrango yang hijau, berselimut awan pagi.</p>
+      <blockquote>“Tidak perlu terbang jauh untuk menemukan lautan awan. Kadang ia ada di akhir pekan terdekatmu.”</blockquote>
+      <div class="tips">
+        <h4>Sebelum berangkat</h4>
+        <ul>
+          <li>Daftar melalui sistem pendaftaran resmi Taman Nasional Gunung Gede Pangrango; kuota harian terbatas.</li>
+          <li>Siapkan jas hujan, karena kabut dan hujan bisa datang tiba-tiba.</li>
+          <li>Edelweis di Surya Kencana dilindungi. Cukup dipotret, jangan dipetik.</li>
+        </ul>
+      </div>
+      <div class="ajak"><a href="#cari" class="btn" data-pilih="4">Booking Gede &amp; Pangrango →</a></div>
+    </article>
+  </template>
+
+  <dialog class="baca" id="baca" aria-label="Kisah pendakian">
+    <button class="baca-tutup" aria-label="Tutup" onclick="tutupBaca()">✕</button>
+    <div id="baca-isi"></div>
+  </dialog>
+</section>
+
 <!-- 4. GALERI -->
 <section class="galeri" id="galeri">
   <div class="wrap tengah muncul">
@@ -495,6 +747,7 @@
           <li><a href="#tentang">Tentang kami</a></li>
           <li><a href="#cara">Cara booking</a></li>
           <li><a href="#destinasi">Gunung favorit</a></li>
+          <li><a href="#kisah">Kisah pendakian</a></li>
         </ul>
       </div>
     </div>
@@ -528,6 +781,18 @@
     if (e.isIntersecting){ e.target.classList.add('tampil'); io.unobserve(e.target); }
   }), {threshold:.1});
   document.querySelectorAll('.muncul').forEach(el => io.observe(el));
+
+  // Kisah pendakian: buka artikel
+  const dlg = document.getElementById('baca'), isi = document.getElementById('baca-isi');
+  document.querySelectorAll('.k-kartu').forEach(k => k.addEventListener('click', () => {
+    isi.innerHTML = '';
+    isi.appendChild(document.getElementById(k.dataset.artikel).content.cloneNode(true));
+    isi.querySelectorAll('[data-pilih]').forEach(a => a.addEventListener('click', () => { pilih(+a.dataset.pilih); tutupBaca(); }));
+    dlg.showModal(); dlg.scrollTop = 0; document.body.classList.add('terkunci');
+  }));
+  function tutupBaca(){ dlg.close(); }
+  dlg.addEventListener('close', () => document.body.classList.remove('terkunci'));
+  dlg.addEventListener('click', e => { if (e.target === dlg) tutupBaca(); });
 </script>
 </body>
 </html>
